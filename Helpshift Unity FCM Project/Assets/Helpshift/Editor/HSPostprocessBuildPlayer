@@ -1,0 +1,109 @@
+#!/usr/bin/python
+
+"""
+iOS (Build = iPhone) only Script to Helpshift SDK to a XCode project.
+This script should be called with only the
+absolute path of the output directory for the iOS build
+
+sys.argv[0] : name of the python script
+sys.argv[1] : path of the Unity iPhone project
+sys.argv[2] : type of build target
+sys.argv[3] : version of unity
+"""
+
+import os, sys, json
+from mod_pbxproj import XcodeProject
+import shutil
+
+if sys.argv[2] != 'iPhone' and sys.argv[2] != 'iOS' :
+    sys.exit(1)
+
+XCODE_PROJECT_PATH = sys.argv[1] + '/Unity-iPhone.xcodeproj'
+HELPSHIFT_SDK_PATH = os.path.dirname(os.path.realpath(__file__)) + '/../Plugins/iOS/'
+
+with open (os.path.dirname(os.path.abspath(__file__)) + "/build_config.json", "r") as myfile:
+    data = myfile.read().replace('\n', '')
+
+parsedConfig = json.loads(data)
+
+print("Start adding Helpshift-iOS SDK");
+
+print("XCODE_PROJECT_PATH - " + XCODE_PROJECT_PATH)
+print("HELPSHIFT_SDK_PATH - " + HELPSHIFT_SDK_PATH)
+
+project = XcodeProject.Load(XCODE_PROJECT_PATH +'/project.pbxproj')
+
+print('Step 1: Adding Dependency Libraries')
+if parsedConfig["flavor"] == "support":
+    shutil.copy2(HELPSHIFT_SDK_PATH + '/libSupport.a', XCODE_PROJECT_PATH + '/../Libraries')
+else:
+    shutil.copy2(HELPSHIFT_SDK_PATH + '/libHelpshift.a', XCODE_PROJECT_PATH + '/../Libraries')
+
+framework_group = project.get_or_create_group('Frameworks')
+project.add_file_if_doesnt_exist('System/Library/Frameworks/CoreGraphics.framework', tree='SDKROOT', parent=framework_group)
+project.add_file_if_doesnt_exist('System/Library/Frameworks/CoreTelephony.framework', tree='SDKROOT', parent=framework_group)
+project.add_file_if_doesnt_exist('System/Library/Frameworks/CoreText.framework', tree='SDKROOT', parent=framework_group)
+project.add_file_if_doesnt_exist('System/Library/Frameworks/MobileCoreServices.framework', tree='SDKROOT', parent=framework_group)
+project.add_file_if_doesnt_exist('System/Library/Frameworks/Security.framework', tree='SDKROOT', parent=framework_group)
+project.add_file_if_doesnt_exist('System/Library/Frameworks/QuartzCore.framework', tree='SDKROOT', parent=framework_group)
+project.add_file_if_doesnt_exist('System/Library/Frameworks/SystemConfiguration.framework', tree='SDKROOT', parent=framework_group)
+project.add_file_if_doesnt_exist('System/Library/Frameworks/Foundation.framework', tree='SDKROOT', parent=framework_group)
+project.add_file_if_doesnt_exist('System/Library/Frameworks/UIKit.framework', tree='SDKROOT', parent=framework_group)
+project.add_file_if_doesnt_exist('System/Library/Frameworks/QuickLook.framework', tree='SDKROOT', parent=framework_group)
+project.add_file_if_doesnt_exist('System/Library/Frameworks/MobileCoreServices.framework', tree='SDKROOT', parent=framework_group)
+project.add_file_if_doesnt_exist('System/Library/Frameworks/Photos.framework', tree='SDKROOT', parent=framework_group)
+project.add_file_if_doesnt_exist('System/Library/Frameworks/WebKit.framework', tree='SDKROOT', parent=framework_group)
+if parsedConfig["flavor"] == "helpshift":
+    project.add_file_if_doesnt_exist('System/Library/Frameworks/CoreLocation.framework', tree='SDKROOT', parent=framework_group)
+
+# If you are targeting Xcode 6, please remove the below line since CoreSpotlight is not available on Xcode 6
+project.add_file_if_doesnt_exist('System/Library/Frameworks/CoreSpotlight.framework', tree='SDKROOT', parent=framework_group, weak=True)
+
+project.add_other_ldflags('-lsqlite3')
+project.add_other_ldflags('-lz')
+project.add_other_ldflags('-licucore')
+project.add_other_ldflags('-ObjC')
+
+print('Step 2 : Removing any existing files')
+
+helpshift_group = project.get_groups_by_name('HelpshiftSDK')
+
+if helpshift_group and helpshift_group.count > 0:
+    helpshift_group = helpshift_group[0]
+    project.remove_file(helpshift_group)
+
+
+print('Step 3: Adding HelpshiftSDK to XCodeProject')
+
+hs_group = project.get_or_create_group('HelpshiftSDK')
+
+# Only add these files if the Unity version is 4.x, for 5.x Unity is able to add these files on its own.
+if sys.argv[3].startswith("4") :
+    if parsedConfig["flavor"] == "support":
+        project.add_file(XCODE_PROJECT_PATH + '/../Libraries/libSupport.a', parent=hs_group)
+    else:
+        project.add_file(XCODE_PROJECT_PATH + '/../Libraries/libHelpshift.a', parent=hs_group)
+        project.add_file(HELPSHIFT_SDK_PATH + '/HelpshiftAll.h', parent=hs_group)
+        project.add_file(HELPSHIFT_SDK_PATH + '/HelpshiftCampaigns.h', parent=hs_group)
+
+    project.add_file(HELPSHIFT_SDK_PATH + '/HelpshiftCore.h', parent=hs_group)
+    project.add_file(HELPSHIFT_SDK_PATH + '/HelpshiftSupport.h', parent=hs_group)
+    project.add_file(HELPSHIFT_SDK_PATH + '/HsUnityAppController.mm', parent=hs_group)
+    # unity specific header file
+    project.add_file(HELPSHIFT_SDK_PATH + '/Helpshift-Unity.h', parent=hs_group)
+    project.add_file(HELPSHIFT_SDK_PATH + '/HsUIResources.bundle', parent=hs_group)
+    project.add_file(HELPSHIFT_SDK_PATH + '/HsLocalization.bundle', parent=hs_group)
+
+
+
+project.add_folder(HELPSHIFT_SDK_PATH + "/HSThemes", excludes=["^(.*\.DS_Store)|(.*.meta)$"], parent=hs_group)
+
+# config json files
+project.add_file(HELPSHIFT_SDK_PATH + '/HelpshiftApiConfig.json', parent=hs_group)
+project.add_file(HELPSHIFT_SDK_PATH + '/HelpshiftInstallConfig.json', parent=hs_group)
+
+if project.modified:
+    project.backup() # take project.pbxproj backup,
+    project.save()   # save modified pbxproj after adding helpshift sdk
+
+print("Finished adding Helpshift-iOS SDK");

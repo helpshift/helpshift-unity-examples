@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.helpshift"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="14" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- App receives GCM messages. -->
+    <!--permission android:name="${applicationId}.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" /-->
+    <!-- GCM requires a Google account. From API 15, we dont need this permission for GCM, so restrict max level to be 15 -->
+    <!--uses-permission android:name="android.permission.GET_ACCOUNTS" android:maxSdkVersion="15" /-->
+    <!-- Keeps the processor from sleeping when a message is received. -->
+    <!--uses-permission android:name="android.permission.WAKE_LOCK" /-->
+    
+    <application>
+        <provider
+            android:name="com.helpshift.support.providers.HSPluginFileProvider"
+            android:authorities="com.helpshift.sample.helpshift.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/hs__provider_paths" />
+        </provider>
+
+        <activity
+            android:name="com.helpshift.support.activities.ParentActivity"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop"
+            android:theme="@style/Helpshift.Theme.Activity" />
+        <activity
+            android:name="com.helpshift.support.HSReview"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:theme="@style/Helpshift.Theme.Dialog" />
+
+        <!--
+        receiver android:name="com.helpshift.supportCampaigns.gcm.HSGcmBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND" >
+        <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+        <category android:name="${applicationId}" />
+        </intent-filter>
+        </receiver>
+        <service android:name="com.helpshift.supportCampaigns.gcm.HSGcmIntentService" /
+        -->
+        <activity
+            android:name="com.helpshift.supportCampaigns.activities.UnityDelegateActivity"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.helpshift.campaigns.activities.ParentActivity"
+            android:hardwareAccelerated="true"
+            android:theme="@style/Helpshift.Theme.Activity" >
+        </activity>
+        <activity
+            android:name="com.helpshift.campaigns.activities.NotificationActivity"
+            android:configChanges="orientation|screenSize|locale|layoutDirection"
+            android:excludeFromRecents="true"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTask"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <service
+            android:name="com.helpshift.campaigns.services.NotificationService"
+            android:exported="false" />
+    </application>
+
+</manifest>

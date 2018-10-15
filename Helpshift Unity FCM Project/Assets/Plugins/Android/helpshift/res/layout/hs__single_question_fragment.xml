@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/faq_content_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.helpshift.support.webkit.CustomWebView
+            android:id="@+id/web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Helpshift.Style.QuestionLoadProgress"
+            android:visibility="gone"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/question_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/hs__separatorColor"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/hs__footerPromptBackground"
+            android:minHeight="48dp"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_horizontal_margin_medium"
+            android:paddingRight="@dimen/activity_horizontal_margin_medium">
+
+            <com.helpshift.views.HSTextView
+                android:id="@+id/question_footer_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="@string/hs__mark_yes_no_question"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/hs__textSizeSmall"/>
+
+            <com.helpshift.views.HSButton
+                android:id="@+id/unhelpful_button"
+                style="@style/Helpshift.Style.BorderlessButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/hs__mark_no"/>
+
+            <com.helpshift.views.HSButton
+                android:id="@+id/helpful_button"
+                style="@style/Helpshift.Style.BorderlessButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/hs__mark_yes"/>
+
+            <com.helpshift.views.HSButton
+                android:id="@+id/contact_us_button"
+                style="@style/Helpshift.Style.BorderlessButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/hs__contact_us_btn"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
