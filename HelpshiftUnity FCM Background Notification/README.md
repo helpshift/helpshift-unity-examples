@@ -29,11 +29,13 @@ In the Unity project, we will lower the priority of "ListenerService" and increa
 * Declare the "HelpshiftCustomFCMService" in "Assets/Plugins/Android/AndroidManifest.xml"
 
 
+```
 	<service android:name="com.helpshift.fcmunity.HelpshiftCustomFCMService" android:exported="false">
         <intent-filter android:priority="100">
                     <action android:name="com.google.firebase.MESSAGING_EVENT" />
         </intent-filter>
     </service>
+```
 
 * We increase the "priority" of our overridden service to get push notifications before FCM's internal service.
 
