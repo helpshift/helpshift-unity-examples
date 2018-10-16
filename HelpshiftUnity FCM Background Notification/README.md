@@ -36,4 +36,5 @@ In the Unity project, we will lower the priority of "ListenerService" and increa
     </service>
 
 * We increase the "priority" of our overridden service to get push notifications before FCM's internal service.
+
 * Build the Unity project and test Helpshift's push notification in foreground/background/killed app state.
