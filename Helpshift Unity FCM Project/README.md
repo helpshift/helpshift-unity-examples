@@ -21,5 +21,5 @@ https://developers.helpshift.com/unity/getting-started-ios/
 	* InitializeFirebase()
 	* OnTokenReceived()
 	* OnMessageReceived()
-* Add example scene to the app "/Assets/Helpshift/Example/HelpshiftExample.unity"
+* Add example scene to the app "/Assets/Helpshift/Example/HelpshiftExample.unity" and attach "Assets/Helpshift/Example/HelpshiftExampleScript.cs" script to the "background_image" object
 * Switch build system for Android build to "Gradle". Build the app and run for Android platform.
