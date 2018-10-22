@@ -111,7 +111,6 @@ public class HelpshiftExampleScript : MonoBehaviour
 #if UNITY_ANDROID
         _support.registerDelegates();
 #endif
-        _support.requestUnreadMessagesCount(true);
         /*HelpshiftUser user = new HelpshiftUser.Builder (<user-identifier>, <user-email>)
 			.setAuthToken (<user-auth-token>)
 			.setName (<user-name>)
