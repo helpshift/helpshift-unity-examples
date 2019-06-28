@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "181111281816",
+    "firebase_url": "https://unity-fcm-testing.firebaseio.com",
+    "project_id": "unity-fcm-testing",
+    "storage_bucket": "unity-fcm-testing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:181111281816:android:ff2626bdf893843d",
+        "android_client_info": {
+          "package_name": "com.example.qotdapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "181111281816-5c3ds1rh9pgs525nntkv1t6b0nii9ink.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq2kC7HhRfyH1Ow486O_w6ISt-71Qd8vU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "181111281816-5c3ds1rh9pgs525nntkv1t6b0nii9ink.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:181111281816:android:f707ea44ed7c1250",
+        "android_client_info": {
+          "package_name": "com.helpshift.fcm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "181111281816-5c3ds1rh9pgs525nntkv1t6b0nii9ink.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq2kC7HhRfyH1Ow486O_w6ISt-71Qd8vU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "181111281816-5c3ds1rh9pgs525nntkv1t6b0nii9ink.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
