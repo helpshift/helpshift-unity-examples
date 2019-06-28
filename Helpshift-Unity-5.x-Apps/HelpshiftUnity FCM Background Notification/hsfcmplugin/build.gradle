@@ -1,0 +1,39 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+        }
+    }
+
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://maven.google.com"
+    }
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly (name:'Helpshift', ext:'aar')
+    compileOnly (name:'com.google.firebase.firebase-messaging-unity-6.1.1', ext:'aar')
+    implementation 'com.google.firebase:firebase-messaging:17.3.1'
+}
+
+apply plugin: 'com.google.gms.google-services'
