@@ -1,0 +1,13 @@
+<dependencies>
+<!-- Reference: https://github.com/googlesamples/unity-jar-resolver
+     Android dependencies are specified under the "androidPackages" element.
+     Each "androidPackage" element contains the attributes of an Android dependency (e.g AAR, JAR reference).-->
+  <androidPackages>
+    <androidPackage spec="com.android.support:design:26.0.2">
+    </androidPackage>
+    <androidPackage spec="com.android.support:cardview-v7:26.0.2">
+    </androidPackage>
+    <androidPackage spec="com.android.support:recyclerview-v7:26.0.2">
+    </androidPackage>
+  </androidPackages>
+</dependencies>
