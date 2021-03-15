@@ -19,5 +19,7 @@ A Unity project to demonstrate use case of Helpshift Unity SDK in a game.
 * You can now build the Unity project with either Android or iOS platform.
 
 ### To Know more about Helpshift Unity SDK visit our developer docs -
+
 [Android](https://developers.helpshift.com/unity/getting-started-android/)
+
 [iOS](https://developers.helpshift.com/unity/getting-started-ios/)
