@@ -1,0 +1,38 @@
+<dependencies>
+  <packages>
+    <package>com.android.support:cardview-v7:26.0.2</package>
+    <package>com.android.support:design:26.0.2</package>
+    <package>com.android.support:recyclerview-v7:26.0.2</package>
+  </packages>
+  <files>
+    <file>Assets/Plugins/Android/com.android.support.animated-vector-drawable-26.0.2.aar</file>
+    <file>Assets/Plugins/Android/com.android.support.appcompat-v7-26.0.2.aar</file>
+    <file>Assets/Plugins/Android/com.android.support.cardview-v7-26.0.2.aar</file>
+    <file>Assets/Plugins/Android/com.android.support.design-26.0.2.aar</file>
+    <file>Assets/Plugins/Android/com.android.support.recyclerview-v7-26.0.2.aar</file>
+    <file>Assets/Plugins/Android/com.android.support.support-annotations-26.0.2.jar</file>
+    <file>Assets/Plugins/Android/com.android.support.support-compat-26.0.2.aar</file>
+    <file>Assets/Plugins/Android/com.android.support.support-core-ui-26.0.2.aar</file>
+    <file>Assets/Plugins/Android/com.android.support.support-core-utils-26.0.2.aar</file>
+    <file>Assets/Plugins/Android/com.android.support.support-fragment-26.0.2.aar</file>
+    <file>Assets/Plugins/Android/com.android.support.support-media-compat-26.0.2.aar</file>
+    <file>Assets/Plugins/Android/com.android.support.support-v4-26.0.2.aar</file>
+    <file>Assets/Plugins/Android/com.android.support.support-vector-drawable-26.0.2.aar</file>
+    <file>Assets/Plugins/Android/com.android.support.transition-26.0.2.aar</file>
+  </files>
+  <settings>
+    <setting name="androidAbis" value="armeabi-v7a" />
+    <setting name="bundleId" value="com.helpshift.demo" />
+    <setting name="explodeAars" value="True" />
+    <setting name="gradleBuildEnabled" value="True" />
+    <setting name="gradlePropertiesTemplateEnabled" value="False" />
+    <setting name="gradleTemplateEnabled" value="False" />
+    <setting name="installAndroidPackages" value="True" />
+    <setting name="localMavenRepoDir" value="Assets/GeneratedLocalRepo" />
+    <setting name="packageDir" value="Assets/Plugins/Android" />
+    <setting name="patchAndroidManifest" value="True" />
+    <setting name="patchMainTemplateGradle" value="True" />
+    <setting name="projectExportEnabled" value="False" />
+    <setting name="useJetifier" value="False" />
+  </settings>
+</dependencies>
